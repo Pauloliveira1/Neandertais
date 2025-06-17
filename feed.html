@@ -6,13 +6,29 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; }
+    .post { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 8px; }
+    .img-post { max-width: 100%; margin-top: 5px; }
+    .comment { font-size: 0.9em; margin-left: 10px; color: #555; }
+    textarea, input { width: 100%; margin: 5px 0; }
+  </style>
 </head>
 <body>
-  <h1>Bem-vindo ao Plux Feed!</h1>
-  <button id="logoutBtn">Sair</button>
+  <h1>Plux Feed</h1>
+  <button onclick="logout()">Sair</button>
+  <button onclick="goToProfile()">Perfil</button>
+
+  <h3>Criar Post</h3>
+  <textarea id="postText" placeholder="O que está acontecendo?"></textarea>
+  <input id="imageLink" placeholder="Link da imagem (opcional)">
+  <button onclick="createPost()">Postar</button>
+
+  <h3>Feed</h3>
+  <div id="feed"></div>
 
   <script>
-    // Mesma configuração Firebase
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
       authDomain: "plux-998a6.firebaseapp.com",
@@ -20,25 +36,102 @@
       projectId: "plux-998a6",
       storageBucket: "plux-998a6.appspot.com",
       messagingSenderId: "639722927532",
-      appId: "1:639722927532:web:a15a1a3355faf15ad33609",
-      measurementId: "G-W0Y5D7SVF5"
+      appId: "1:639722927532:web:a15a1a3355faf15ad33609"
     };
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    document.getElementById("logoutBtn").addEventListener("click", () => {
-      auth.signOut().then(() => {
-        window.location.href = "index.html";
-      });
-    });
-
-    // Verifica se usuário está logado
     auth.onAuthStateChanged(user => {
       if (!user) {
         window.location.href = "index.html";
+      } else {
+        loadFeed();
       }
     });
+
+    function logout() {
+      auth.signOut().then(() => window.location.href = "index.html");
+    }
+
+    function goToProfile() {
+      window.location.href = "perfil.html";
+    }
+
+    function createPost() {
+      const text = document.getElementById("postText").value.trim();
+      const image = document.getElementById("imageLink").value.trim();
+      const user = auth.currentUser;
+      if (!text) return;
+
+      db.collection("posts").add({
+        text,
+        image,
+        userId: user.uid,
+        email: user.email,
+        timestamp: Date.now(),
+        likes: 0,
+        likedBy: [],
+        comments: []
+      }).then(() => {
+        document.getElementById("postText").value = "";
+        document.getElementById("imageLink").value = "";
+      });
+    }
+
+    function loadFeed() {
+      db.collection("posts").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+        const feed = document.getElementById("feed");
+        feed.innerHTML = "";
+        snapshot.forEach(doc => {
+          const post = doc.data();
+          const div = document.createElement("div");
+          div.className = "post";
+          div.innerHTML = `
+            <p><strong>${post.email}</strong></p>
+            <p>${post.text}</p>
+            ${post.image ? `<img src="${post.image}" class="img-post"/>` : ""}
+            <p>Likes: ${post.likes}</p>
+            <button onclick="likePost('${doc.id}')">Curtir</button>
+            <div>
+              <input type="text" id="comment-${doc.id}" placeholder="Responder...">
+              <button onclick="addComment('${doc.id}')">Enviar</button>
+            </div>
+            ${post.comments && post.comments.length > 0 ? post.comments.map(c => `<p class="comment">${c}</p>`).join('') : ""}
+          `;
+          feed.appendChild(div);
+        });
+      });
+    }
+
+    function likePost(postId) {
+      const user = auth.currentUser;
+      const ref = db.collection("posts").doc(postId);
+      ref.get().then(doc => {
+        if (!doc.exists) return;
+        const data = doc.data();
+        if (!data.likedBy.includes(user.uid)) {
+          ref.update({
+            likes: data.likes + 1,
+            likedBy: [...data.likedBy, user.uid]
+          });
+        }
+      });
+    }
+
+    function addComment(postId) {
+      const input = document.getElementById(`comment-${postId}`);
+      const commentText = input.value.trim();
+      if (!commentText) return;
+
+      const ref = db.collection("posts").doc(postId);
+      ref.update({
+        comments: firebase.firestore.FieldValue.arrayUnion(commentText)
+      }).then(() => {
+        input.value = "";
+      });
+    }
   </script>
 </body>
 </html>
