@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset e base */
 * {
   margin: 0;
   padding: 0;
@@ -7,74 +7,84 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
-  color: white;
-  min-height: 100vh;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+/* Cabeçalho */
+header {
+  background-color: #a3c9f9;
+  padding: 15px 20px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo do loading */
-#loading {
-  font-size: 1.5rem;
+header h1 {
+  font-size: 24px;
+  color: #2a2a2a;
 }
 
-/* Estilo do formulário */
-#loginForm {
-  display: none;
-  flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  width: 100%;
-  max-width: 400px;
-  backdrop-filter: blur(10px);
+header nav {
+  display: flex;
+  gap: 15px;
 }
 
-/* Título */
-#loginForm h1 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: #fff;
-}
-
-/* Inputs */
-#loginForm input {
-  padding: 12px;
+header nav button {
+  background: none;
   border: none;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  font-size: 1rem;
-  background-color: #f3f4f6;
-  color: #111;
-}
-
-#loginForm input::placeholder {
-  color: #888;
-}
-
-/* Botão */
-#loginForm button {
-  padding: 12px;
-  font-size: 1rem;
-  background-color: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 8px;
+  font-size: 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.2s;
 }
 
-#loginForm button:hover {
-  background-color: #4338ca;
+header nav button:hover {
+  transform: scale(1.1);
 }
 
-/* Status de erro */
-#loginStatus {
-  margin-top: 10px;
-  color: #ff6b6b;
-  font-size: 0.9rem;
+/* Feed */
+#feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 15px;
+}
+
+.post {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 500px;
+}
+
+.post p {
+  margin-bottom: 8px;
+}
+
+.post input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.post button {
+  margin-top: 5px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #5ca8f1;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.post button:hover {
+  background-color: #488cd9;
 }
