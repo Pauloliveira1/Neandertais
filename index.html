@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Plux - Login</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
   <style>
     body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
     #loading { font-size: 20px; }
@@ -17,8 +17,8 @@
 
   <form id="loginForm">
     <h1>Plux - Login</h1>
-    <input type="email" id="email" placeholder="Email" required><br><br>
-    <input type="password" id="password" placeholder="Senha" required><br><br>
+    <input type="email" id="email" placeholder="Email" required /><br /><br />
+    <input type="password" id="password" placeholder="Senha" required /><br /><br />
     <button type="submit">Entrar / Cadastrar</button>
     <p id="loginStatus" style="color: red;"></p>
   </form>
@@ -26,6 +26,7 @@
   <script>
     console.log("🔥 Iniciando Plux...");
 
+    // Sua config Firebase (confere se está igual a sua!)
     const firebaseConfig = {
       apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
       authDomain: "plux-998a6.firebaseapp.com",
@@ -39,7 +40,6 @@
 
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db = firebase.firestore();
 
     document.addEventListener("DOMContentLoaded", () => {
       console.log("✅ DOM carregado");
