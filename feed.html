@@ -2,24 +2,43 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Plux - Feed</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
 <body>
-  <h1>Feed - Plux</h1>
-  <button onclick="logout()">Sair</button>
-  <button onclick="goToProfile()">Meu Perfil</button>
-  <hr/>
-  <textarea id="postText" placeholder="O que está pensando?"></textarea><br/>
-  <input type="text" id="imageLink" placeholder="Link da imagem (opcional)" /><br/>
-  <button onclick="createPost()">Publicar</button>
-  <hr/>
-  <div id="feed"></div>
+  <h1>Bem-vindo ao Plux Feed!</h1>
+  <button id="logoutBtn">Sair</button>
 
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="script.js"></script>
+  <script>
+    // Mesma configuração Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
+      authDomain: "plux-998a6.firebaseapp.com",
+      databaseURL: "https://plux-998a6-default-rtdb.firebaseio.com",
+      projectId: "plux-998a6",
+      storageBucket: "plux-998a6.appspot.com",
+      messagingSenderId: "639722927532",
+      appId: "1:639722927532:web:a15a1a3355faf15ad33609",
+      measurementId: "G-W0Y5D7SVF5"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      auth.signOut().then(() => {
+        window.location.href = "index.html";
+      });
+    });
+
+    // Verifica se usuário está logado
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
 </body>
 </html>
