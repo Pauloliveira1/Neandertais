@@ -2,34 +2,33 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Plux - Feed</title>
+  <title>Neandertais - Feed</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: auto; }
-    .post { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 8px; }
-    .img-post { max-width: 100%; margin-top: 5px; }
-    .comment { font-size: 0.9em; margin-left: 10px; color: #555; }
-    textarea, input { width: 100%; margin: 5px 0; }
-  </style>
 </head>
 <body>
-  <h1>Plux Feed</h1>
-  <button onclick="logout()">Sair</button>
-  <button onclick="goToProfile()">Perfil</button>
 
-  <h3>Criar Post</h3>
-  <textarea id="postText" placeholder="O que está acontecendo?"></textarea>
-  <input id="imageLink" placeholder="Link da imagem (opcional)">
-  <button onclick="createPost()">Postar</button>
+  <header>
+    <h1>Neandertais</h1>
+    <div class="nav-buttons">
+      <button onclick="goToFeed()">🏠</button>
+      <button onclick="goToProfile()">👤</button>
+      <button onclick="logout()">🚪</button>
+    </div>
+  </header>
+
+  <section id="postSection">
+    <textarea id="postText" placeholder="O que está acontecendo?"></textarea>
+    <input id="imageLink" placeholder="Link da imagem (opcional)">
+    <button onclick="createPost()">＋ Postar</button>
+  </section>
 
   <h3>Feed</h3>
   <div id="feed"></div>
 
   <script>
-    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
       authDomain: "plux-998a6.firebaseapp.com",
@@ -58,6 +57,10 @@
 
     function goToProfile() {
       window.location.href = "perfil.html";
+    }
+
+    function goToFeed() {
+      window.location.href = "feed.html";
     }
 
     function createPost() {
