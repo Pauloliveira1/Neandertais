@@ -1,4 +1,4 @@
-/* Reset e base */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,85 +6,85 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2f6ff;
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  color: #2c3e50;
 }
 
 /* Cabeçalho */
 header {
-  background-color: #a3c9f9;
-  padding: 15px 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  background-color: #a3d8f4;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 header h1 {
-  font-size: 24px;
-  color: #2a2a2a;
+  font-size: 1.5rem;
+  color: #2c3e50;
 }
 
-header nav {
-  display: flex;
-  gap: 15px;
-}
-
-header nav button {
+.nav-buttons button {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 1.3rem;
+  margin-left: 10px;
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
-header nav button:hover {
-  transform: scale(1.1);
+/* Criar post */
+#postSection {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Feed */
-#feed {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  padding: 0 15px;
+#postSection textarea,
+#postSection input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  border-radius: 6px;
 }
 
+#postSection button {
+  background-color: #74b9ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Postagens */
 .post {
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  padding: 15px;
-  margin: 10px 0;
-  width: 100%;
-  max-width: 500px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.post p {
-  margin-bottom: 8px;
+.img-post {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-.post input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.comment {
+  font-size: 0.85rem;
+  color: #555;
+  margin-left: 10px;
   margin-top: 5px;
-}
-
-.post button {
-  margin-top: 5px;
-  padding: 6px 12px;
-  border: none;
-  background-color: #5ca8f1;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.post button:hover {
-  background-color: #488cd9;
 }
