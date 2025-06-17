@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plux - Feed</title>
+</head>
+<body>
+  <h1>Feed - Plux</h1>
+  <button onclick="logout()">Sair</button>
+  <button onclick="goToProfile()">Meu Perfil</button>
+  <hr/>
+  <textarea id="postText" placeholder="O que está pensando?"></textarea><br/>
+  <input type="text" id="imageLink" placeholder="Link da imagem (opcional)" /><br/>
+  <button onclick="createPost()">Publicar</button>
+  <hr/>
+  <div id="feed"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
