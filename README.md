@@ -24,7 +24,8 @@
   </form>
 
   <script>
-    // Configuração Firebase
+    console.log("🔥 Iniciando Plux...");
+
     const firebaseConfig = {
       apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
       authDomain: "plux-998a6.firebaseapp.com",
@@ -41,6 +42,7 @@
     const db = firebase.firestore();
 
     document.addEventListener("DOMContentLoaded", () => {
+      console.log("✅ DOM carregado");
       const loginForm = document.getElementById("loginForm");
       const loading = document.getElementById("loading");
       const loginStatus = document.getElementById("loginStatus");
@@ -50,24 +52,35 @@
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
+        console.log("🔐 Tentando login com:", email);
+
         auth.signInWithEmailAndPassword(email, password)
-          .then(() => window.location.href = "feed.html")
+          .then(() => {
+            console.log("✅ Login bem-sucedido");
+            window.location.href = "feed.html";
+          })
           .catch(() => {
+            console.log("⚠️ Login falhou, tentando criar conta...");
             auth.createUserWithEmailAndPassword(email, password)
-              .then(() => window.location.href = "feed.html")
+              .then(() => {
+                console.log("✅ Conta criada com sucesso");
+                window.location.href = "feed.html";
+              })
               .catch(err => {
+                console.error("❌ Erro ao criar conta:", err.message);
                 loginStatus.innerText = err.message;
               });
           });
       });
 
       auth.onAuthStateChanged(user => {
+        console.log("📡 Verificando autenticação...");
         if (!user) {
-          // Usuário não logado: mostra formulário e oculta loading
+          console.log("👤 Nenhum usuário logado");
           loading.style.display = "none";
           loginForm.style.display = "block";
         } else {
-          // Já está logado: redireciona
+          console.log("✅ Usuário logado:", user.email);
           window.location.href = "feed.html";
         }
       });
