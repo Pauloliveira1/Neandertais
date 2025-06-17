@@ -1,0 +1,80 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Estilo do loading */
+#loading {
+  font-size: 1.5rem;
+}
+
+/* Estilo do formulário */
+#loginForm {
+  display: none;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+/* Título */
+#loginForm h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #fff;
+}
+
+/* Inputs */
+#loginForm input {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  background-color: #f3f4f6;
+  color: #111;
+}
+
+#loginForm input::placeholder {
+  color: #888;
+}
+
+/* Botão */
+#loginForm button {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#loginForm button:hover {
+  background-color: #4338ca;
+}
+
+/* Status de erro */
+#loginStatus {
+  margin-top: 10px;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+}
