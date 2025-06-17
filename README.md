@@ -3,30 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <title>Plux - Login</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
-    #loading { font-size: 20px; }
-    #loginForm { display: none; }
-  </style>
 </head>
 <body>
   <div id="loading">Carregando...</div>
 
   <form id="loginForm">
-    <h1>Plux - Login</h1>
-    <input type="email" id="email" placeholder="Email" required /><br /><br />
-    <input type="password" id="password" placeholder="Senha" required /><br /><br />
+    <h1>Plux</h1>
+    <input type="email" id="email" placeholder="Email" required /><br />
+    <input type="password" id="password" placeholder="Senha" required /><br />
     <button type="submit">Entrar / Cadastrar</button>
-    <p id="loginStatus" style="color: red;"></p>
+    <p id="loginStatus"></p>
   </form>
 
   <script>
     console.log("🔥 Iniciando Plux...");
 
-    // Sua config Firebase (confere se está igual a sua!)
     const firebaseConfig = {
       apiKey: "AIzaSyBtL4JTvftbw2aHwYd-zRnfhsxCOrx_6cI",
       authDomain: "plux-998a6.firebaseapp.com",
@@ -42,7 +37,6 @@
     const auth = firebase.auth();
 
     document.addEventListener("DOMContentLoaded", () => {
-      console.log("✅ DOM carregado");
       const loginForm = document.getElementById("loginForm");
       const loading = document.getElementById("loading");
       const loginStatus = document.getElementById("loginStatus");
@@ -52,35 +46,26 @@
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
 
-        console.log("🔐 Tentando login com:", email);
-
         auth.signInWithEmailAndPassword(email, password)
           .then(() => {
-            console.log("✅ Login bem-sucedido");
             window.location.href = "feed.html";
           })
           .catch(() => {
-            console.log("⚠️ Login falhou, tentando criar conta...");
             auth.createUserWithEmailAndPassword(email, password)
               .then(() => {
-                console.log("✅ Conta criada com sucesso");
                 window.location.href = "feed.html";
               })
               .catch(err => {
-                console.error("❌ Erro ao criar conta:", err.message);
                 loginStatus.innerText = err.message;
               });
           });
       });
 
       auth.onAuthStateChanged(user => {
-        console.log("📡 Verificando autenticação...");
         if (!user) {
-          console.log("👤 Nenhum usuário logado");
           loading.style.display = "none";
-          loginForm.style.display = "block";
+          loginForm.style.display = "flex";
         } else {
-          console.log("✅ Usuário logado:", user.email);
           window.location.href = "feed.html";
         }
       });
